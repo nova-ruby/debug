@@ -27,7 +27,7 @@
   },
   "activationEvents": [
     "onLanguage:ruby",
-    "onWorkspaceContains:*.rb",
+    "onWorkspaceContains:*.rb"
   ],
   "breakpoints": [{ "syntax": "ruby" }],
   "debugAdapters": {
@@ -86,13 +86,13 @@
             "type": "path",
             "title": "Debugger Path",
             "description": "Location of the rdbg executable. If not specified the task will try to find it by running \"which rdbg\".",
-            "placeholder": "rdgb",
+            "placeholder": "rdgb"
         },
         {
             "key": "ruby.debug.customArgs",
             "type": "stringArray",
             "title": "Arguments",
-            "description": "Command line arguments passed to the program.",
+            "description": "Command line arguments passed to the program."
         },
         {
           "key": "ruby.debug.env",
