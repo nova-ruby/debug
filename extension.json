@@ -7,7 +7,7 @@
   "main": "main.js",
   "license": "MIT",
   "repository": "https://github.com/tommasongr/nova-ruby-debug",
-  "repository": "https://github.com/tommasongr/nova-ruby-debug/issues",
+  "bugs": "https://github.com/tommasongr/nova-ruby-debug/issues",
   "funding": "https://www.paypal.com/paypalme/tommasonegri/25EUR",
   "categories": [ "tasks" ],
   "keywords": [
