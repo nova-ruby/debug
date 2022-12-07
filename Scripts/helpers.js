@@ -11,7 +11,7 @@ exports.resolveRdbgPath = async function() {
     let err = ""
 
     process.onStdout((output) => {
-      str += output.trim()
+      str += output
     })
 
     process.onStderr((error) => {
@@ -20,9 +20,13 @@ exports.resolveRdbgPath = async function() {
 
     process.onDidExit((status) => {
       if (status == 1) reject(err)
-      if (str.length == 0) reject("not found")
 
-      return resolve(str)
+      str = str.trim()
+      if (str.length == 0 || str == "rdbg not found") {
+        reject(new Error("Impossible to find rdbg in $PATH."))
+      }
+
+      resolve(str)
     })
 
     process.start()
@@ -42,7 +46,7 @@ exports.resolveRubyDebugSocketPath = async function() {
     let err = ""
 
     process.onStdout((output) => {
-      str += output.trim()
+      str += output
     })
 
     process.onStderr((error) => {
@@ -51,9 +55,16 @@ exports.resolveRubyDebugSocketPath = async function() {
 
     process.onDidExit((status) => {
       if (status == 1) reject(err)
-      if (str.length == 0) reject("not found")
 
-      return resolve(str)
+      str = str.trim()
+      if (str.length == 0) {
+        reject(new Error("No open socket. Make sure you have launched rdbg with the --open flag."))
+      }
+      if (str.split(/\r?\n/).length > 1) {
+        reject(new Error("Multiple open sockets. Please specify which one to use."))
+      }
+
+      resolve(str)
     })
 
     process.start()
@@ -82,9 +93,13 @@ exports.generateRubyDebugSocketPath = async function() {
 
     process.onDidExit((status) => {
       if (status == 1) reject(err)
-      if (str.length == 0) reject("not found")
 
-      return resolve(str)
+      str = str.trim()
+      if (str.length == 0) {
+        reject(new Error("Impossible to generate socket path. Make sure rdbg is in $PATH."))
+      }
+
+      resolve(str)
     })
 
     process.start()
