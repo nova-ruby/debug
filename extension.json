@@ -1,0 +1,142 @@
+{
+  "identifier": "com.tommasonegri.rdbg",
+  "name": "Ruby Debug",
+  "organization": "Tommaso Negri",
+  "description": "Ruby's rdbg debugger support for Nova.",
+  "version": "1.0",
+  "main": "main.js",
+  "license": "MIT",
+  "repository": "https://github.com/tommasongr/nova-ruby-debug",
+  "repository": "https://github.com/tommasongr/nova-ruby-debug/issues",
+  "funding": "https://www.paypal.com/paypalme/tommasonegri/25EUR",
+  "categories": [ "tasks" ],
+  "keywords": [
+    "ruby",
+    "rails",
+    "debug",
+    "debugger",
+    "rdgb",
+    "ruby debug",
+    "bridgetown",
+    "roda",
+    "hanami",
+    "sinatra"
+  ],
+  "entitlements": {
+    "process": true
+  },
+  "activationEvents": [
+    "onLanguage:ruby",
+    "onWorkspaceContains:*.rb",
+  ],
+  "breakpoints": [{ "syntax": "ruby" }],
+  "debugAdapters": {
+    "rubyDebug": {
+      "name": "Ruby Debug",
+      "image": "debug-adapter"
+    }
+  },
+  "taskTemplates": {
+    "rubyDebug": {
+      "name": "Ruby Debug",
+      "description": "Run and debug Ruby scripts, modules, and apps.",
+      "image": "debug-adapter",
+      "tasks": {
+        "run": {
+          "resolve": "ruby",
+          "data": {
+            "type": "rubyDebug"
+          }
+        }
+      },
+      "config": [
+        {
+            "key": "ruby.debug.script",
+            "type": "path",
+            "title": "Script",
+            "description": "The path to the Ruby script to target for debugging (default: active ruby file).",
+            "relative": true
+        },
+        {
+            "key": "ruby.debug.command",
+            "title": "Command",
+            "type": "string",
+            "description": "The executable command.",
+            "placeholder": "ruby"
+        },
+        {
+            "key": "ruby.debug.useBundler",
+            "type": "boolean",
+            "title": "Use Bundler",
+            "description": "Execute Ruby programs with bundle exec if command configuration is not given and Gemfile is available in the workspace.",
+            "default": false
+        },
+        {
+            "key": "ruby.debug.workingDirectory",
+            "type": "path",
+            "title": "Working Directory",
+            "description": "The working directory in which to invoke the script. By default, the project folder is used.",
+            "placeholder": "Current Workspace",
+            "relative": true,
+            "allowFiles": false,
+            "allowFolders": true
+        },
+        {
+            "key": "ruby.debug.rdbgPath",
+            "type": "path",
+            "title": "Debugger Path",
+            "description": "Location of the rdbg executable. If not specified the task will try to find it by running \"which rdbg\".",
+            "placeholder": "rdgb",
+        },
+        {
+            "key": "ruby.debug.customArgs",
+            "type": "stringArray",
+            "title": "Arguments",
+            "description": "Command line arguments passed to the program.",
+        },
+        {
+          "key": "ruby.debug.env",
+          "type": "objectArray",
+          "title": "Environment",
+          "description": "Additional environment variables to pass to the debugging (and debugged) process. Formatted ad JSON object string.",
+          "children": [
+            {
+              "key": "key",
+              "type": "string",
+              "title": "Key",
+              "description": "LEAVE IT EMPTY. This is only shown due to a bug in Nova."
+            },
+            {
+              "key": "value",
+              "type": "string",
+              "title": "Value",
+              "description": "LEAVE IT EMPTY. This is only shown due to a bug in Nova."
+            }
+          ]
+        }
+      ]
+    },
+    "rubyRemoteDebug": {
+      "name": "Ruby Remote Debug",
+      "description": "Run and debug Ruby scripts, modules, and apps running on a remote server.",
+      "image": "debug-adapter",
+      "tasks": {
+        "run": {
+          "resolve": "ruby",
+          "data": {
+            "type": "rubyRemoteDebug"
+          }
+        }
+      },
+      "config": [
+        {
+          "key": "ruby.debug.socketPath",
+          "type": "string",
+          "title": "Socket Path",
+          "description": "The UNIX Domain Socket Path of a remote server on which rdbg is listening for connections. If not specified the task will try to find it by running \"rdbg --util=list-socks\". If multiple socks are listed you have to specify which one to use. See the README for a configuration example.",
+          "placeholder": "/var/folders/0y/5cyl_crn3mv0y_gyg734ty2h0000gn/T/ruby-debug-sock-501/ruby-debug-tommaso-71169"
+        }
+      ]
+    }
+  }
+}
