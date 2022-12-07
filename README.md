@@ -79,3 +79,10 @@ To use the new `bin/dev` command edit your `Procfile.dev` accordingly:
 web: rdbg --command --open --nonstop -- bin/rails server -p 3000
 css: bin/rails tailwindcss:watch
 ``` 
+
+## Contributing
+
+You are welcome to contribute to the development!
+
+All you have to do to get up and running is to fork, download and rename the folder from `nova-ruby-debug` to `Ruby Debug.novaextension`.
+After that you should be able to active the project as extension from the Nova's `Extensions` menu.
